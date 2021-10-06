@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import * as C from "./Styles/AppStyles";
+import { Item } from "./Types/Item";
+import { ListItem } from "./Components/ListItem";
+import { AddArea } from "./Components/AddArea";
 
-function App() {
+const App = () => {
+  const [list, setList] = useState<Item[]>([]);
+
+  const hadleAddTask = (taskName: string) => {
+    let newList = [...list];
+    newList.push({
+      id: list.length + 1,
+      name: taskName,
+      done: false,
+    });
+    setList(newList);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <C.Container>
+      <C.Area>
+        <C.Header>Lista de Tarefas</C.Header>
+
+        {/* Add nova tarefa */}
+
+        <AddArea onEnter={hadleAddTask} />
+
+        {/* Criar lista */}
+        
+        {list.map((item, index) => (
+          <ListItem key={index} item={item} />
+        ))}
+      </C.Area>
+    </C.Container>
   );
-}
+};
 
 export default App;

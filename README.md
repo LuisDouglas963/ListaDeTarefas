@@ -1,4 +1,4 @@
-# App Lista de tarefas
+# AppTodo List 📋
 
 In the project directory, you can run:
 
